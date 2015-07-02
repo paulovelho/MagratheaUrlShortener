@@ -1,0 +1,10 @@
+configs/magrathea.conf
+app/inc/config.php
+_cache/
+_compiled/
+_compressed/
+*_compressed.js
+*_compressed.css
+app/plugins/
+logs
+medias
