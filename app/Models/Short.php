@@ -13,7 +13,7 @@ class Short {
 	}
 
 	public function Build($name, $data){
-		$this->name = $name;
+		$this->name = strtolower($name);
 		$this->url = $this->addhttp($data["url"]);
 		$this->clicks = (@$data["clicks"] ? $data["clicks"] : 0);
 	}
@@ -39,6 +39,8 @@ class ShortControl {
 	}
 
 	public function GetShort($short_name){
+		$short_name = strtolower($short_name);
+		if(empty($short_name)) return $this->GetShort("default");
 		$arr_obj = @ShortControlDatabase::Instance()->GetDatabase()->getConfig($short_name);
 		if(count($arr_obj)==0 && $short_name != "default")
 			return $this->GetShort("default");
