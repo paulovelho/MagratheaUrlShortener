@@ -49,7 +49,9 @@ class ShortControl {
 
 	public function GetAllShorts(){
 		$all = array();
-		$arr_all = ShortControlDatabase::Instance()->GetDatabase()->getConfig();
+		$db = $arr_all = ShortControlDatabase::Instance()->GetDatabase();
+		$db->createFileIfNotExists();
+		$arr_all = $db->getConfig();
 		foreach ($arr_all as $name => $data) {
 			$s = new Short();
 			$s->Build($name, $data);
@@ -96,7 +98,7 @@ class ShortControlDatabase {
 		return self::$inst;
 	}
 
-	public static function GetDatabase(){
+	public function GetDatabase(){
 		$db = new MagratheaConfigFile();
 		$db->setPath(self::$databasePath)
 			->setFile(self::$databaseFile);
